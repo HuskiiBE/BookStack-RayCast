@@ -9,7 +9,7 @@
   "commands": [
     {
       "name": "search-command",
-      "title": "Search Documentation",
+      "title": "Search documentation",
       "subtitle": "Find pages, chapters, or books in BookStack",
       "description": "Quickly search through your BookStack contents and open the results directly from Raycast.",
       "mode": "view"
@@ -54,6 +54,14 @@
       "description": "Enter your BookStack API token secret here",
       "placeholder": "Enter your token secret here"
     }
+  ],
+  "keywords": [
+    "Huskii",
+    "BookStack",
+    "Documentation",
+    "Productivity",
+    "Search",
+    "API"
   ],
   "dependencies": {
     "@raycast/api": "^1.72.1",
