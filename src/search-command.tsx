@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { List, ActionPanel, Action, showToast, ToastStyle } from '@raycast/api';
 import { searchBookStack, SearchResultItem } from './bookstack-api';
+import { stripHtmlTags } from './utils';
 
 export default function SearchDocumentation() {
     const [searchTerm, setSearchTerm] = useState<string>('');
@@ -21,7 +22,7 @@ export default function SearchDocumentation() {
                 setItems(results);
             })
             .catch((error) => {
-                showToast(ToastStyle.Failure, 'Could not fetch results', error instanceof Error ? error.message : String(error));
+                showToast(Toast.Style.Failure, "Failed to fetch data", error instanceof Error ? Error.message : "An unknown error occurred").then(r => console.log(r));
             })
             .finally(() => {
                 setIsLoading(false);
@@ -37,8 +38,9 @@ export default function SearchDocumentation() {
         >
             {items.map((item, index) => (
                 <List.Item
-                    key={item.id + index}  // Create a unique key using both id and index
+                    key={item.id + index}
                     title={item.name}
+                    subtitle={stripHtmlTags(item.preview_html?.content)}
                     actions={
                         <ActionPanel>
                             <Action.OpenInBrowser url={item.url} title="Open URL" />

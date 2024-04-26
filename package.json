@@ -3,7 +3,7 @@
   "name": "bookstack",
   "title": "BookStack",
   "description": "Seamlessly integrates Raycast with BookStack to search and manage your documentation directly from your macOS desktop.",
-  "icon": "command-icon.png",
+  "icon": "bookstack.png",
   "author": "huskii",
   "license": "MIT",
   "commands": [
@@ -17,8 +17,15 @@
     {
       "name": "show-all-books",
       "title": "Show all books",
-      "subtitle": "Show all in BookStack",
+      "subtitle": "Show all books in BookStack",
       "description": "Quickly list all your BookStack books and open the results directly from Raycast.",
+      "mode": "view"
+    },
+    {
+      "name": "show-all-shelves",
+      "title": "Show all shelves",
+      "subtitle": "Show all shelves in BookStack",
+      "description": "Quickly list all your BookStack shelves and open the results directly from Raycast.",
       "mode": "view"
     }
   ],

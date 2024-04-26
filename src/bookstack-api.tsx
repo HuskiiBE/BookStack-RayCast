@@ -2,6 +2,8 @@
 import axios from 'axios';
 import { getPreferenceValues } from '@raycast/api';
 
+export const { baseUrl } = getPreferenceValues<Preferences>();
+
 interface Preferences {
     baseUrl: string;
     tokenId: string;
@@ -10,7 +12,6 @@ interface Preferences {
 
 interface SearchResult {
     data: SearchResultItem[];
-    // Add any other properties from the API response as needed
 }
 
 export interface SearchResultItem {
@@ -18,7 +19,6 @@ export interface SearchResultItem {
     name: string;
     url: string;
     type: string;
-    // Add additional properties from the API response as needed
 }
 
 const preferences: Preferences = getPreferenceValues<Preferences>();
@@ -33,7 +33,6 @@ export async function searchBookStack(query: string): Promise<SearchResultItem[]
     const response = await apiClient.get<SearchResult>('/api/search', {
         params: { query }
     });
-    // Ensure that the response.data.data is an array before returning
     if (response.data && Array.isArray(response.data.data)) {
         return response.data.data;
     }
@@ -47,9 +46,21 @@ export async function getAllBooks(): Promise<SearchResultItem[]> {
             id: book.id,
             name: book.name,
             description: book.description,
-            url: `/books/${book.slug}`  // Assuming the URL follows this pattern
-            // Adjust as needed if the URL needs to be built differently
+            url: `/books/${book.slug}`
         }));
     }
     throw new Error('Books data is not in the expected format');
+}
+
+export async function getAllShelves(): Promise<SearchResultItem[]> {
+    const response = await apiClient.get('/api/shelves');
+    if (response.data && Array.isArray(response.data.data)) {
+        return response.data.data.map((shelf) => ({
+            id: shelf.id,
+            name: shelf.name,
+            description: shelf.description,
+            url: `/shelves/${shelf.slug}`
+        }));
+    }
+    throw new Error('Shelves data is not in the expected format');
 }

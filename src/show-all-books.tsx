@@ -1,7 +1,9 @@
 // src/show-all-books.tsx
 import React, { useState, useEffect } from 'react';
-import { List, ActionPanel, Action, showToast, ToastStyle } from '@raycast/api';
-import { getAllBooks, SearchResultItem } from './bookstack-api';
+import { List, ActionPanel, Action, showToast } from '@raycast/api';
+import { getAllBooks, SearchResultItem, baseUrl } from './bookstack-api';
+import { stripHtmlTags } from './utils';
+
 
 export default function ShowAllBooks() {
     const [books, setBooks] = useState<SearchResultItem[]>([]);
@@ -14,7 +16,7 @@ export default function ShowAllBooks() {
                 setIsLoading(false);
             })
             .catch((error) => {
-                showToast(ToastStyle.Failure, "Couldn't fetch books", error.message);
+                showToast(Toast.Style.Failure, "Failed to fetch data", error instanceof Error ? Error.message : "An unknown error occurred").then(r => console.log(r));
                 setIsLoading(false);
             });
     }, []);
@@ -25,11 +27,11 @@ export default function ShowAllBooks() {
                 <List.Item
                     key={book.id.toString()}
                     title={book.name}
-                    subtitle={book.description}
-                    accessoryTitle={book.url}
+                    subtitle={stripHtmlTags(book.description)}
+                    accessories={[{ text: book.url }]}
                     actions={
                         <ActionPanel>
-                            <Action.OpenInBrowser url={`https://yourbookstackdomain.com${book.url}`} />
+                            <Action.OpenInBrowser url={`${baseUrl}${book.url}`} />
                         </ActionPanel>
                     }
                 />
