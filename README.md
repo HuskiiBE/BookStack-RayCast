@@ -10,9 +10,9 @@ BookStack Integration for Raycast enables you to seamlessly search and manage yo
 
 ## Usage
 
-- Use the `Search documentation` command to quickly search through your BookStack contents and open the results directly from Raycast.
-- Use the `Show all books` command to list all your BookStack books and access them with a single click.
-- Use the `Show all shelves` command to browse through all your BookStack shelves and open them directly in your browser.
+- Use the `Search Documentation` command to quickly search through your BookStack contents and open the results directly from Raycast.
+- Use the `Show All Books` command to list all your BookStack books and access them with a single click.
+- Use the `Show All Shelves` command to browse through all your BookStack shelves and open them directly in your browser.
 
 ## Configuration
 
